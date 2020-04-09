@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+<model name="blob_points">
+  <static>true</static>
+    <link name="link">
+      <collision name="collision">
+          <geometry>
+          <box>
+            <size>0.05 0.05 0.005</size>
+          </box>
+        </geometry>
+      </collision>
+      <visual name="visual">
+	<pose>0 0 0 0 0 0</pose>
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.005</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://blob_points/materials/scripts/</uri>
+	          <uri>model://blob_points/materials/textures</uri>
+            <name>blob/blob_points</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

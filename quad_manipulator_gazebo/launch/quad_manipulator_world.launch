@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- MAVROS posix SITL environment launch script -->
+    <!-- launches MAVROS, PX4 SITL, Gazebo environment, and spawns vehicle -->
+    <!-- vehicle pose -->
+    <arg name="x" default="0"/>
+    <arg name="y" default="0"/>
+    <arg name="z" default="0.3"/>
+    <arg name="R" default="0"/>
+    <arg name="P" default="0"/>
+    <arg name="Y" default="0"/>
+    <!-- vehicle model and world -->
+    <arg name="est" default="ekf2"/>
+    <arg name="vehicle" default="quad_manipulator"/>
+    <arg name="world" default="$(find quad_manipulator_gazebo)/worlds/impedancecontrol.world"/>
+    <!-- <arg name="sdf" default="$(find quad_manipulator_description)/urdf/$(arg vehicle).xacro"/> -->
+    <arg name="sdf" default="$(find quad_manipulator_description)/models/$(arg vehicle)/$(arg vehicle).sdf"/>
+
+    <!-- gazebo configs -->
+    <arg name="gui" default="true"/>
+    <arg name="debug" default="false"/>
+    <arg name="verbose" default="false"/>
+    <arg name="paused" default="false"/>
+    <arg name="respawn_gazebo" default="false"/>
+    <!-- MAVROS configs -->
+    <arg name="fcu_url" default="udp://:14540@localhost:14557"/>
+    <arg name="respawn_mavros" default="false"/>
+    <!-- PX4 configs -->
+    <arg name="interactive" default="true"/>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find quad_manipulator_description)/urdf/$(arg vehicle).xacro'" />
+
+  <!-- Load the SDF into the ROS Parameter Server -->
+  <param name="robot_description_sdf" textfile="$(arg sdf)" />
+
+    <!-- Gazebo sim -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="world_name" value="$(arg world)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="respawn_gazebo" value="$(arg respawn_gazebo)"/>
+    </include>
+    <!-- gazebo model -->
+    <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model $(arg vehicle) -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg R) -P $(arg P) -Y $(arg Y)"/>
+
+
+  <!-- gazebo simulation with px4 and mavros launch file -->
+  <include file="$(find quad_manipulator_control)/launch/mavros_posix_sitl.launch">
+    <arg name="x" value="$(arg x)"/>
+    <arg name="y" value="$(arg y)"/>
+    <arg name="z" value="$(arg z)"/>
+    <arg name="R" value="$(arg R)"/>
+    <arg name="P" value="$(arg P)"/>
+    <arg name="Y" value="$(arg Y)"/>
+    <arg name="est" value="$(arg est)"/>
+    <arg name="world" value="$(arg world)"/>
+    <arg name="vehicle" value="$(arg vehicle)"/>
+    <arg name="sdf" value="$(arg sdf)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="interactive" value="$(arg interactive)"/>
+    <arg name="debug" value="$(arg debug)"/>
+    <arg name="verbose" value="$(arg verbose)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="respawn_gazebo" value="$(arg respawn_gazebo)"/>
+    <arg name="fcu_url" value="$(arg fcu_url)"/>
+    <arg name="respawn_mavros" value="$(arg respawn_mavros)"/>
+  </include>
+
+  <!-- ros_control quad_manipulator launch file -->
+  <!-- <include file="$(find quad_manipulator_control)/launch/manipulator_control.launch">
+  </include> -->
+
+</launch>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+  
+  <!-- Load joint controller configurations from YAML file to parameter server -->
+  <rosparam file="$(find quad_manipulator_control)/config/manipulator_positioncontrol.yaml" command="load"/>
+  <!-- <rosparam file="$(find quad_manipulator_control)/config/manipulator_effortcontrol.yaml" command="load"/> -->
+
+  <!-- load the controllers -->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/quad_manipulator" args="joint_state_controller arm_joint1_position_controller arm_joint2_position_controller arm_joint3_position_controller grasp_joint1_position_controller grasp_joint2_position_controller" />
+  
+  <!-- pub the topic data for initial pose -->
+  <!-- <node pkg="rostopic" type="rostopic" name="joint1_initial_value" args="pub -r 50 /quad_manipulator/arm_joint1_position_controller/command std_msgs/Float64 'data: 0'" output="screen" /> -->
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+	respawn="false" output="screen">
+    <remap from="/joint_states" to="/quad_manipulator/joint_states" />
+  </node>
+
+</launch>
+

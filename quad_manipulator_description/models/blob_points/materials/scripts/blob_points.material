@@ -1,0 +1,17 @@
+  material blob/blob_points
+    {
+      technique
+      {
+        pass
+        {
+          ambient 1.0 1.0 1.0 1.0
+	  diffuse 1.0 1.0 1.0 1.0
+          specular 0.0 0.0 0.0 0.0 0.0
+
+          texture_unit
+          {
+            texture blob_points.jpg
+          }
+        }
+      }
+    }

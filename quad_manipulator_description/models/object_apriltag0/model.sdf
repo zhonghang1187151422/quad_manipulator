@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<sdf version="1.4">
+<model name="object_apriltag0">
+  <static>false</static>
+  <pose>0 0 0.05 0 0 0</pose>
+
+    <link name="link1">
+      <pose>0 0 0 0 0 0</pose>
+      <inertial>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+          <mass>0.01</mass>
+      </inertial>
+      <collision name="collision">
+          <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>1000</mu2>
+          <fdir1>0 0 0</fdir1>
+            </ode>
+          </friction>
+         </surface>
+      </collision>
+      <visual name="visual">
+	  
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://april_tag0/materials/scripts/</uri>
+	          <uri>model://april_tag0/materials/textures</uri>
+            <name>AprilTag/Tag0</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+
+    <link name="link2">
+      <pose>0 0.3 0 0 0 0</pose>
+      <inertial>
+          <inertia>
+            <ixx>0.00</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+          <mass>0.01</mass>
+      </inertial>
+      <collision name="collision">
+          <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>1000</mu>
+              <mu2>1000</mu2>
+          <fdir1>0 0 0</fdir1>
+            </ode>
+          </friction>
+         </surface>
+      </collision>
+      <visual name="visual">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <box>
+            <size>0.1 0.1 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://april_tag1/materials/scripts/</uri>
+	          <uri>model://april_tag1/materials/textures</uri>
+            <name>AprilTag/Tag1</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+
+    <link name="link3">
+      <pose>0 0.15 0 1.57 0 0</pose>
+      <inertial>
+          <inertia>
+            <ixx>0.001</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.001</iyy>
+            <iyz>0</iyz>
+            <izz>0.001</izz>
+          </inertia>
+          <mass>0.01</mass>
+      </inertial>
+      <collision name="collision">
+          <geometry>
+          <cylinder>
+            <radius>0.02</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </collision>
+      <visual name="visual">
+        <cast_shadows>false</cast_shadows>
+        <geometry>
+          <cylinder>
+            <radius>0.02</radius>
+            <length>0.2</length>
+          </cylinder>
+        </geometry>
+      </visual>
+    </link>
+
+
+
+   <joint name="joint1" type="fixed">
+      <parent>link1</parent>
+      <child>link2</child>
+      <axis>
+        <xyz>0 0 0</xyz>
+      </axis>
+    </joint>
+
+   <joint name="joint2" type="fixed">
+      <parent>link1</parent>
+      <child>link3</child>
+      <axis>
+        <xyz>0 0 0</xyz>
+      </axis>
+    </joint>
+
+
+  </model>
+</sdf>

@@ -1,0 +1,734 @@
+<?xml version="1.0"?>
+
+<robot name="quad_manipulator" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <xacro:include filename="$(find quad_manipulator_description)/urdf/quad_manipulator.gazebo" />
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find quad_manipulator_description)/urdf/materials.xacro" />
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass 
+        value="1.5" />
+      <inertia
+        ixx="0.0347563"
+        ixy="0"
+        ixz="0"
+        iyy="0.0458929"
+        iyz="0"
+        izz="0.0977" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.75294 0.75294 0.75294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="/imu_link">
+  <inertial>
+    <origin xyz="0 0 0" rpy="0 0 0" />
+    <mass value="0.015" />
+    <inertia ixx="1e-05" ixy="0" ixz="0" iyy="1e-05" iyz="0" izz="1e-05" />
+  </inertial>
+  </link>
+  <joint name="/imu_joint" type="revolute">
+    <parent link="base_link" />
+    <child link="/imu_link" />
+    <axis xyz="1 0 0" />
+    <limit lower="0" upper="0" effort="0" velocity="0" />
+    <use_parent_model_frame>1</use_parent_model_frame>
+  </joint>
+
+
+  <link
+    name="rotor_link_0">
+    <inertial>
+      <origin
+        xyz="-7.3331E-06 0.0086864 -0.00026313"
+        rpy="0 0 0" />
+      <mass
+        value="0.022934" />
+      <inertia
+        ixx="1.612E-06"
+        ixy="-1.1526E-09"
+        ixz="-1.8205E-06"
+        iyy="9.0967E-05"
+        iyz="-2.8751E-10"
+        izz="9.0135E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/dji_13455_prop_ccw.dae" />
+      </geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+	<mesh
+          filename="package://quad_manipulator_description/meshes/dji_13455_prop_ccw.dae" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rotor_joint_0"
+    type="continuous">
+    <origin
+      xyz="0.19339 -0.19339 0.077478"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rotor_link_0" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="rotor_link_1">
+    <inertial>
+      <origin
+        xyz="-7.3878E-06 0.0086864 -0.00026314"
+        rpy="0 0 0" />
+      <mass
+        value="0.022934" />
+      <inertia
+        ixx="1.612E-06"
+        ixy="-1.1546E-09"
+        ixz="-1.8205E-06"
+        iyy="9.0967E-05"
+        iyz="-2.894E-10"
+        izz="9.0135E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/dji_13455_prop_ccw.dae" />
+      </geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/dji_13455_prop_ccw.dae" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rotor_joint_1"
+    type="continuous">
+    <origin
+      xyz="-0.19339 0.19339 0.077478"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rotor_link_1" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="rotor_link_2">
+    <inertial>
+      <origin
+        xyz="-8.2569E-06 0.0096575 -0.00026317"
+        rpy="0 0 0" />
+      <mass
+        value="0.022929" />
+      <inertia
+        ixx="1.6116E-06"
+        ixy="1.1887E-09"
+        ixz="-1.8165E-06"
+        iyy="9.0918E-05"
+        iyz="3.3076E-10"
+        izz="9.0087E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/dji_13455_prop_cw.dae" />
+      </geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/dji_13455_prop_cw.dae" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rotor_joint_2"
+    type="continuous">
+    <origin
+      xyz="0.19339 0.19339 0.077478"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rotor_link_2" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+  <link
+    name="rotor_link_3">
+    <inertial>
+      <origin
+        xyz="-8.224E-06 0.0096575 -0.00026313"
+        rpy="0 0 0" />
+      <mass
+        value="0.022929" />
+      <inertia
+        ixx="1.6116E-06"
+        ixy="1.1793E-09"
+        ixz="-1.8166E-06"
+        iyy="9.0918E-05"
+        iyz="3.2833E-10"
+        izz="9.0087E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/dji_13455_prop_cw.dae" />
+      </geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/dji_13455_prop_cw.dae" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rotor_joint_3"
+    type="continuous">
+    <origin
+      xyz="-0.19339 -0.19339 0.077478"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rotor_link_3" />
+    <axis
+      xyz="0 0 1" />
+  </joint>
+
+
+
+<link
+    name="arm_base_link">
+    <inertial>
+      <origin
+        xyz="-2.7736E-07 -0.010835 -0.00060677"
+        rpy="0 0 0" />
+      <mass
+        value="0.046251" />
+      <inertia
+        ixx="1.4275E-06"
+        ixy="1.1217E-10"
+        ixz="-2.4E-10"
+        iyy="1.1147E-06"
+        iyz="2.3065E-07"
+        izz="3.1277E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/arm_base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/arm_base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="arm_base_joint"
+    type="fixed">
+    <origin
+      xyz="0 -0.07 -0.063"
+      rpy="-3.1416 -4.5912E-49 -3.1416" />
+    <parent
+      link="base_link" />
+    <child
+      link="arm_base_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="arm_link_1">
+    <inertial>
+      <origin
+        xyz="-3.3658E-06 -0.0086194 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.033119" />
+      <inertia
+        ixx="0.0033119"
+        ixy="0"
+        ixz="0"
+        iyy="0.0033119"
+        iyz="0"
+        izz="0.0033119" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/arm_link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/arm_link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="arm_joint_1"
+    type="revolute">
+    <origin
+      xyz="0 0 0.02075"
+      rpy="-1.5708 0 -3.1416" />
+    <parent
+      link="arm_base_link" />
+    <child
+      link="arm_link_1" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      lower="-3.14"
+      upper="3.14"
+      effort="10"
+      velocity="1" />
+    <dynamics
+    damping="0.2"
+    friction="0"
+    spring_reference="0"
+    spring_stiffness="0.5"/>
+  </joint>
+  <link
+    name="arm_link_2">
+    <inertial>
+      <origin
+        xyz="-0.0002669 1.3977E-05 0.069913"
+        rpy="0 0 0" />
+      <mass
+        value="0.097521" />
+      <inertia
+        ixx="0.0097521"
+        ixy="0"
+        ixz="0"
+        iyy="0.0097521"
+        iyz="0"
+        izz="0.0097521" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/arm_link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/arm_link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="arm_joint_2"
+    type="revolute">
+    <origin
+      xyz="0 -0.0300000000000296 0"
+      rpy="0.523598775598296 0 0" />
+    <parent
+      link="arm_link_1" />
+    <child
+      link="arm_link_2" />
+    <axis
+      xyz="1 0 0" />
+      <limit
+        lower="-0.8"
+        upper="3.0"
+        effort="10"
+        velocity="1" />
+    <dynamics
+    damping="0.2"
+    friction="0"
+    spring_reference="0"
+    spring_stiffness="0.5"/>
+  </joint>
+  <link
+    name="arm_link_3">
+    <inertial>
+      <origin
+        xyz="-2.7373E-05 -0.0018898 -0.084066"
+        rpy="0 0 0" />
+      <mass
+        value="0.027976" />
+      <inertia
+        ixx="0.0027976"
+        ixy="0"
+        ixz="0"
+        iyy="0.0027976"
+        iyz="0"
+        izz="0.0027976" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/arm_link_3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/arm_link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="arm_joint_3"
+    type="revolute">
+    <origin
+      xyz="0 0 0.139825"
+      rpy="-0.523598775598296 0 0" />
+    <parent
+      link="arm_link_2" />
+    <child
+      link="arm_link_3" />
+    <axis
+      xyz="1 0 0" />
+      <limit
+        lower="-5.4"
+        upper="0"
+        effort="10"
+        velocity="1" />
+    <dynamics
+    damping="0.2"
+    friction="0"
+    spring_reference="0"
+    spring_stiffness="0.5"/>
+  </joint>
+  <link
+    name="grasp_link_1">
+    <inertial>
+      <origin
+        xyz="-0.012047 0.027271 -0.0023834"
+        rpy="0 0 0" />
+      <mass
+        value="0.016743" />
+      <inertia
+        ixx="0.0016743"
+        ixy="0"
+        ixz="0"
+        iyy="0.0016743"
+        iyz="0"
+        izz="0.0016743" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/grasp_link_1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/grasp_link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="grasp_joint_1"
+    type="revolute">
+    <origin
+      xyz="-0.021588457268 0 -0.1455143753568"
+      rpy="-1.5707963267949 -0.474869647734542 0" />
+    <parent
+      link="arm_link_3" />
+    <child
+      link="grasp_link_1" />
+    <axis
+      xyz="0 0 1" />
+      <limit
+        lower="0"
+        upper="0.8"
+        effort="10"
+        velocity="1" />
+  </joint>
+  <link
+    name="grasp_link_2">
+    <inertial>
+      <origin
+        xyz="0.0056081 0.029333 -0.0023778"
+        rpy="0 0 0" />
+        <mass
+          value="0.016743" />
+        <inertia
+          ixx="0.0016743"
+          ixy="0"
+          ixz="0"
+          iyy="0.0016743"
+          iyz="0"
+          izz="0.0016743" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/grasp_link_2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/grasp_link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="grasp_joint_2"
+    type="revolute">
+    <origin
+      xyz="0.0215884572684 0 -0.1455143753568"
+      rpy="-1.5707963267949 0.246759488513054 0" />
+    <parent
+      link="arm_link_3" />
+    <child
+      link="grasp_link_2" />
+    <axis
+      xyz="0 0 1" />
+      <limit
+        lower="-0.8"
+        upper="0"
+        effort="10"
+        velocity="1" />
+  </joint>
+
+
+
+
+  <link
+    name="camera_link">
+    <inertial>
+      <origin
+        xyz="0.00010063 -0.0056682 -0.00026541"
+        rpy="0 0 0" />
+      <mass
+        value="0.0053198" />
+      <inertia
+        ixx="5.1245E-07"
+        ixy="-4.4617E-09"
+        ixz="6.9177E-09"
+        iyy="6.0024E-07"
+        iyz="1.1779E-08"
+        izz="4.8623E-07" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/camera_link.STL" />
+      </geometry>
+      <material name="orange"/>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://quad_manipulator_description/meshes/camera_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="camera_joint"
+    type="fixed">
+    <origin
+      xyz="0 0.126 -0.057"
+      rpy="0 1.5708 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="camera_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
+
+
+  <!-- quad manipulator transmission -->
+  <transmission name="tran_arm_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_joint_1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_arm_joint1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="tran_arm_joint2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_joint_2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_arm_joint2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="tran_arm_joint3">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="arm_joint_3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_arm_joint3">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="tran_grasp_joint1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="grasp_joint_1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_grasp_joint1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  <transmission name="tran_grasp_joint2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="grasp_joint_2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor_grasp_joint2">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+
+
+</robot>

@@ -1,0 +1,14 @@
+material TexturedShape/apriltags
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture tag36h11_id0.png
+      }
+    }
+  }
+}
+

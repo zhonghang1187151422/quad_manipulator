@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<package>
+  <name>quad_manipulator_control</name>
+  <version>0.0.0</version>
+  <description>The quad_manipulator_control package</description>
+
+  <maintainer email="zhonghang@hnu.edu.cn">zhonghang</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://http://gazebosim.org/w/index.php?title=Tutorials/1.9/Using_A_URDF_In_Gazebo</url>
+  <url type="bugtracker">https://github.com/osrf/gazebo_ros_demos/issues</url>
+  <url type="repository">https://github.com/osrf/gazebo_ros_demos</url>
+
+  <author email="zhonghang@hnu.edu.cn">zhonghang</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+
+  <build_depend>std_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>mavros_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+
+  <run_depend>std_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>controller_manager</run_depend>
+  <run_depend>joint_state_controller</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>rqt_gui</run_depend>
+  <run_depend>effort_controllers</run_depend>
+  <run_depend>mavros_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+
+  <export>
+  </export>
+
+</package>
